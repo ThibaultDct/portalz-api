@@ -9,23 +9,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import io.quarkus.elytron.security.common.BcryptUtil;
-import io.quarkus.security.jpa.Password;
-import io.quarkus.security.jpa.Roles;
-import io.quarkus.security.jpa.UserDefinition;
-import io.quarkus.security.jpa.Username;
 
 @Entity
 @Table(name = "users")
-@UserDefinition
 public class User {
     
     @Id
     private UUID user_id;
-    @Username
     private String username;
-    @Password
     private String password;
-    @Roles
     private String role;
     @Email(message = "Email should be valid")
     private String mail;
