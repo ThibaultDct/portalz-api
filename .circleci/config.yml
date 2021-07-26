@@ -3,25 +3,77 @@
 version: 2.1
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the Docker image tag below to openjdk version of your application.
-    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
-    docker:
-      - image: cimg/openjdk:11.0
+  build-and-test:
+    machine: true
+    resource_class: medium
+    working_directory: ~/repo
+    environment:
+      MAVEN_OPTS: -Xmx6400m
+      GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Use mvn clean and package as the standard maven build phase
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+        # Download maven dependencies so that we can cache them
+        # ########################
       - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-      # Then run your tests!
+          name: Download Dependencies
+          command: mvn dependency:go-offline
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      # Standard maven build and test phases - does not perform a native build (or verify)
+      # ########################
       - run:
-          name: Test
+          name: Build (Standard)
+          command: ./mvnw clean package -DskipTests -Dmaven.test.skip=true
+      - run:
+          name: Verify (Standard)
+          command: ./mvnw test
+      # Install GraalVM and native-image, needed for a native Quarkus build
+      # ########################
+      - run:
+          name: Install GraalVM
+          command: curl https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz -O -J -L && tar xfz graalvm-ce-linux-amd64-19.1.1.tar.gz && mv graalvm-ce-19.1.1 .graalvm && rm graalvm-ce-linux-amd64-19.1.1.tar.gz
+      - run:
+          name: Install native-image
+          command: $GRAALVM_HOME/bin/gu install native-image
+
+      # Perform a native Quarkus build and verify
+      # ########################
+      - run:
+          name: Build (Native)
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
+          no_output_timeout: 30m
+      - run:
+          name: Tests
           command: mvn test
+      - run:
+          name: Verify (Native)
+          command: ./mvnw verify -Pnative
+          no_output_timeout: 30m
+#  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
+#  build-and-test:
+#    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+#    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+#    # Be sure to update the Docker image tag below to openjdk version of your application.
+#    # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
+#    docker:
+#      - image: cimg/openjdk:11.0
+#    steps:
+#      # Checkout the code as the first step.
+#      - checkout
+#      # Use mvn clean and package as the standard maven build phase
+#      - run:
+#          name: Build
+#          command: mvn -B -DskipTests clean package
+#      # Then run your tests!
+#      - run:
+#          name: Test
+#          command: mvn test
 
 workflows:
   # Below is the definition of your workflow.

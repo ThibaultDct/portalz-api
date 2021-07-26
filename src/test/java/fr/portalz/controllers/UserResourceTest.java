@@ -1,4 +1,4 @@
-package fr.portalz;
+package fr.portalz.controllers;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
