@@ -4,7 +4,6 @@ version: 2.1
 
 jobs:
   build-and-test:
-    machine: true
     docker:
       - image: cimg/openjdk:11.0
     resource_class: medium
