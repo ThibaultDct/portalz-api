@@ -34,13 +34,11 @@ jobs:
       - run:
           name: Verify (Standard)
           command: sh ./mvnw test
-      - store_test_results:
-          path: standard-test-results
       # Install GraalVM and native-image, needed for a native Quarkus build
       # ########################
       - run:
           name: Install GraalVM
-          command: curl https://github.com/oracle/graal/archive/refs/tags/vm-21.2.0/graal-vm-21.2.0.tar.gz -O -J -L && tar xfz graal-vm-21.2.0.tar.gz && mv graal-vm-21.2.0 .graalvm && rm graal-vm-21.2.0.tar.gz
+          command: curl https://github.com/oracle/graal/archive/refs/tags/vm-21.2.0/graal-vm-21.2.0.tar.gz -O -J -L && file graal-vm-21.2.0.tar.gz && tar xvf graal-vm-21.2.0.tar.gz && mv graal-vm-21.2.0 .graalvm && rm graal-vm-21.2.0.tar.gz
       - run:
           name: Install native-image
           command: $GRAALVM_HOME/bin/gu install native-image
@@ -54,8 +52,6 @@ jobs:
           name: Verify (Native)
           command: sh ./mvnw verify -Pnative
           no_output_timeout: 30m
-      - store_test_results:
-          path: native-test-results
 
 workflows:
   # Below is the definition of your workflow.
