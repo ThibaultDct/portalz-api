@@ -38,7 +38,7 @@ jobs:
       # ########################
       - run:
           name: Install GraalVM
-          command: curl https://github.com/oracle/graal/archive/refs/tags/vm-21.2.0/graal-vm-21.2.0.tar.gz -O -J -L && file graal-vm-21.2.0.tar.gz && tar xvf graal-vm-21.2.0.tar.gz && mv graal-vm-21.2.0 .graalvm && rm graal-vm-21.2.0.tar.gz
+          command: curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java11-linux-amd64-21.2.0.tar.gz -O -J -L && file graal-vm-21.2.0.tar.gz && tar xfz graalvm-ce-java11-linux-amd64-21.2.0.tar.gz && mv graalvm-ce-java11-linux-amd64-21.2.0 .graalvm && rm graalvm-ce-java11-linux-amd64-21.2.0.tar.gz
       - run:
           name: Install native-image
           command: $GRAALVM_HOME/bin/gu install native-image
