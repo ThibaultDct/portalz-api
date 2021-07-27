@@ -6,7 +6,7 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/openjdk:11.0
-    resource_class: medium
+    resource_class: large
     working_directory: ~/repo
     environment:
       MAVEN_OPTS: -Xmx6400m
