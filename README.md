@@ -1,4 +1,6 @@
-# portalz-api project
+# Portalz Quarkus API
+
+[![Build Status](https://cloud.drone.io/api/badges/ThibaultDct/portalz-api/status.svg)](https://cloud.drone.io/ThibaultDct/portalz-api)
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
