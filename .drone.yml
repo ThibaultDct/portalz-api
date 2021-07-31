@@ -11,6 +11,11 @@ steps:
   - ls -lrta
   - unset MAVEN_CONFIG
   - sh ./mvnw -Pnative package 
+  environment:
+    DB_USERNAME:
+      from_secret: DB_USERNAME
+    DB_PASSWORD:
+      from_secret: DB_PASSWORD
 - name: docker  
   image: plugins/docker
   settings:
