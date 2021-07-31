@@ -3,12 +3,11 @@ name: default
 
 steps:
 - name: portalz-backend
-  image: quay.io/quarkus/ubi-quarkus-native-image:19.2.1
+  image: quay.io/quarkus/ubi-quarkus-native-image:20.3.3-java11
   user: root
   commands:
   - whoami
   - pwd
-  - java --version
   - ls -lrta
   - unset MAVEN_CONFIG
   - sh ./mvnw -Pnative package 
