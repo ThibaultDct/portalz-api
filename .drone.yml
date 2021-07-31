@@ -10,7 +10,7 @@ steps:
   - pwd
   - ls -lrta
   - unset MAVEN_CONFIG
-  - ./mvnw -Pnative package 
+  - sh ./mvnw -Pnative package 
 - name: docker  
   image: plugins/docker
   settings:
