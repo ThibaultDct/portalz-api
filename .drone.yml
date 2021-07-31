@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: portalz-backend
-  image: quay.io/quarkus/ubi-quarkus-native-image:20.3.3-java11
+  image: quay.io/quarkus/ubi-quarkus-native-image:21.2.0-java11
   user: root
   commands:
   - whoami
@@ -14,7 +14,7 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-    username:
+    DB_USERNAME:
       from_secret: DB_USERNAME
-    password:
+    DB_PASSWORD:
       from_secret: DB_PASSWORD
