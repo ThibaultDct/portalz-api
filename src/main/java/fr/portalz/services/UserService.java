@@ -9,22 +9,19 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
-
-import fr.portalz.business.dto.UserDTO;
-import fr.portalz.business.entities.User;
-import fr.portalz.business.repositories.UserRepository;
-import io.quarkus.elytron.security.common.BcryptUtil;
-
 import javax.ws.rs.core.Response.Status;
 
 import org.jboss.logging.Logger;
-import org.keycloak.authorization.client.AuthzClient;
 import org.wildfly.security.WildFlyElytronBaseProvider;
 import org.wildfly.security.password.Password;
 import org.wildfly.security.password.PasswordFactory;
 import org.wildfly.security.password.WildFlyElytronPasswordProvider;
 import org.wildfly.security.password.interfaces.BCryptPassword;
 import org.wildfly.security.password.util.ModularCrypt;
+
+import fr.portalz.business.dto.UserDTO;
+import fr.portalz.business.entities.User;
+import fr.portalz.business.repositories.UserRepository;
 
 @Singleton
 public class UserService {

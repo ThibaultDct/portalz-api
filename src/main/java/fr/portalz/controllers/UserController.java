@@ -3,7 +3,6 @@ package fr.portalz.controllers;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -14,7 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -23,7 +21,6 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import fr.portalz.business.entities.User;
 import fr.portalz.services.UserService;
-import org.keycloak.authorization.client.AuthzClient;
 
 @Path("/api/v1/users")
 @Tag(name = "Users", description = "Users related resources")
