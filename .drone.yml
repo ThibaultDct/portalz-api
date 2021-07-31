@@ -8,6 +8,7 @@ steps:
   commands:
   - whoami
   - pwd
+  - java --version
   - ls -lrta
   - unset MAVEN_CONFIG
   - sh ./mvnw -Pnative package 
@@ -17,4 +18,4 @@ steps:
     username:
       from_secret: DB_USERNAME
     password:
-      from_secret: DB_PASSWORDs
+      from_secret: DB_PASSWORD
