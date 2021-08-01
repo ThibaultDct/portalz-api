@@ -19,7 +19,9 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-    DB_USERNAME:
-      from_secret: DB_USERNAME
-    DB_PASSWORD:
-      from_secret: DB_PASSWORD
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+    repo: thibaultdct/portalz-api-quarkus
+    tags: latest
