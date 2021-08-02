@@ -38,7 +38,7 @@ steps:
   - echo "Deploying on CapRover..."
   - export DEPLOY_BRANCH=caprover-deploy
   - cd ~
-  - git clone $GITHUB_URL
+  - git clone https://github.com/ThibaultDct/portalz-api.git
   - cd portalz-api
   - git checkout $DEPLOY_BRANCH || git checkout -b $DEPLOY_BRANCH
   - git rm -rf .
