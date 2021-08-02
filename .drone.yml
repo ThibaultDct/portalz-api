@@ -51,5 +51,7 @@ steps:
   - echo "{\"schemaVersion\":2,\"imageName\":\"thibaultdct/portalz-api-quarkus:latest\"}" > captain-definition
   - git add .
   - git commit -m "📦️ Deploy thibaultdct/portalz-api-quarkus:latest"
+  - giturl = "https://"$GITHUB_USERNAME""$GITHUB_PASSWORD"github.com/ThibaultDct/portalz-api.git"
+  - git push --repo $giturl
   - git push --set-upstream origin $DEPLOY_BRANCH
   - curl -X POST https://captain.cloud2.thibaultdct.fr/api/v2/user/apps/webhooks/triggerbuild?namespace=captain&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InRva2VuVmVyc2lvbiI6ImUxZTViZDNmLTNlOGQtNGI5OC04ZGVkLTVkM2MwNjAzYTA4YiIsImFwcE5hbWUiOiJwb3J0YWx6IiwibmFtZXNwYWNlIjoiY2FwdGFpbiJ9LCJpYXQiOjE2Mjc5MjE4MDZ9.sSXul8CCgjM_C2R8U61CcKbq1vvu8xc0JdeBYYk6y5w
