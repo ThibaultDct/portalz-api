@@ -92,15 +92,15 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <!-- OPENID CONNECT -->
-    <dependency>
+    <!-- <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-oidc</artifactId>
-    </dependency>
+    </dependency> -->
     <!-- KEYCLOAK -->
-    <dependency>
+    <!-- <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-keycloak-authorization</artifactId>
-    </dependency>
+    </dependency> -->
     <!-- GELF (LOGS) -->
     <dependency>
       <groupId>io.quarkus</groupId>
