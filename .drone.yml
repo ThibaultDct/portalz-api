@@ -34,9 +34,14 @@ steps:
       from_secret: GITHUB_USERNAME
     GITHUB_PASSWORD:
       from_secret: GITHUB_PASSWORD
+    GITHUB_MAIL:
+      from_secret: GITHUB_MAIL
   commands:
   - echo "Deploying on CapRover..."
   - export DEPLOY_BRANCH=caprover-deploy
+  - git config --global user.name $GITHUB_USERNAME
+  - git config --global user.email $GITHUB_MAIL
+  - git config --global user.password $GITHUB_PASSWORD
   - cd ~
   - git clone https://github.com/ThibaultDct/portalz-api.git
   - cd portalz-api
