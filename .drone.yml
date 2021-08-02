@@ -35,7 +35,6 @@ steps:
     GITHUB_PASSWORD:
       from_secret: GITHUB_PASSWORD
   commands:
-  - json='{"schemaVersion": 2, "caproverPassword":"''"}'
   - echo "Deploying on CapRover..."
   - export DEPLOY_BRANCH=caprover-deploy
   - cd ~
