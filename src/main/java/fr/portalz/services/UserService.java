@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
+import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.logging.Logger;
 import org.wildfly.security.WildFlyElytronBaseProvider;
 import org.wildfly.security.password.Password;
@@ -23,6 +24,7 @@ import fr.portalz.business.dto.UserDTO;
 import fr.portalz.business.entities.User;
 import fr.portalz.business.repositories.UserRepository;
 
+@Traced
 @Singleton
 public class UserService {
 

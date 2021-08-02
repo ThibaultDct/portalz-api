@@ -17,11 +17,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
 import fr.portalz.business.entities.User;
 import fr.portalz.services.UserService;
 
+@Traced
 @Path("/api/v1/users")
 @Tag(name = "Users", description = "Users related resources")
 @Produces(MediaType.APPLICATION_JSON)

@@ -4,12 +4,14 @@ import fr.portalz.business.dto.UserDTO;
 import fr.portalz.business.entities.User;
 import fr.portalz.services.UserService;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Traced
 @Path("api/v1/auth")
 @Tag(name = "Authentication", description = "Authentication related resources")
 @Produces(MediaType.APPLICATION_JSON)
