@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 steps:
-- name: portalz-backend
+- name: Native build
   image: quay.io/quarkus/ubi-quarkus-native-image:21.2.0-java11
   user: root
   environment:
@@ -16,7 +16,7 @@ steps:
   - ls -lrta
   - unset MAVEN_CONFIG
   - sh ./mvnw -Pnative package 
-- name: docker  
+- name: Docker 
   image: plugins/docker
   settings:
     username:
@@ -25,3 +25,27 @@ steps:
       from_secret: DOCKER_PASSWORD
     repo: thibaultdct/portalz-api-quarkus
     tags: latest
+- name: Caprover
+  image: alpine/git
+  environment:
+    GITHUB_URL:
+      from_secret: GITHUB_URL
+    GITHUB_USERNAME:
+      from_secret: GITHUB_USERNAME
+    GITHUB_PASSWORD:
+      from_secret: GITHUB_PASSWORD
+  commands:
+  - json='{"schemaVersion": 2, "caproverPassword":"''"}'
+  - echo "Deploying on CapRover..."
+  - export DEPLOY_BRANCH=caprover-deploy
+  - cd ~
+  - git clone $GITHUB_URL
+  - cd portalz-api-git
+  - git checkout $DEPLOY_BRANCH || git checkout -b $DEPLOY_BRANCH
+  - git rm -rf .
+  - git clean -fdx .
+  - echo "{\"schemaVersion\":2,\"imageName\":\"thibaultdct/portalz-api-quarkus:latest\"}" > captain-definition
+  - git add .
+  - git commit -m "📦️ Deploy thibaultdct/portalz-api-quarkus:latest"
+  - git push --set-upstream origin $DEPLOY_BRANCH
+  - curl -X POST https://captain.cloud2.thibaultdct.fr/api/v2/user/apps/webhooks/triggerbuild?namespace=captain&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InRva2VuVmVyc2lvbiI6ImUxZTViZDNmLTNlOGQtNGI5OC04ZGVkLTVkM2MwNjAzYTA4YiIsImFwcE5hbWUiOiJwb3J0YWx6IiwibmFtZXNwYWNlIjoiY2FwdGFpbiJ9LCJpYXQiOjE2Mjc5MjE4MDZ9.sSXul8CCgjM_C2R8U61CcKbq1vvu8xc0JdeBYYk6y5w
