@@ -5,17 +5,17 @@ steps:
 - name: portalz-backend
   image: quay.io/quarkus/ubi-quarkus-native-image:21.2.0-java11
   user: root
+  environment:
+    DB_USERNAME:
+      from_secret: DB_USERNAME
+    DB_PASSWORD:
+      from_secret: DB_PASSWORD
   commands:
   - whoami
   - pwd
   - ls -lrta
   - unset MAVEN_CONFIG
   - sh ./mvnw -Pnative package 
-  environment:
-    DB_USERNAME:
-      from_secret: DB_USERNAME
-    DB_PASSWORD:
-      from_secret: DB_PASSWORD
 - name: docker  
   image: plugins/docker
   settings:
