@@ -39,7 +39,7 @@ steps:
   - export DEPLOY_BRANCH=caprover-deploy
   - cd ~
   - git clone $GITHUB_URL
-  - cd portalz-api-git
+  - cd portalz-api
   - git checkout $DEPLOY_BRANCH || git checkout -b $DEPLOY_BRANCH
   - git rm -rf .
   - git clean -fdx .
