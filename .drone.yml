@@ -51,7 +51,7 @@ steps:
   - echo "{\"schemaVersion\":2,\"imageName\":\"thibaultdct/portalz-api-quarkus:latest\"}" > captain-definition
   - git add .
   - git commit -m "📦️ Deploy thibaultdct/portalz-api-quarkus:latest"
-  - export GITURL = "https://"$GITHUB_USERNAME""$GITHUB_PASSWORD"github.com/ThibaultDct/portalz-api.git"
+  - export GITURL = "https://"$GITHUB_USERNAME":"$GITHUB_PASSWORD"@github.com/ThibaultDct/portalz-api.git"
   - echo $GITURL
   - git push --repo $GITURL
   - git push --set-upstream origin $DEPLOY_BRANCH
